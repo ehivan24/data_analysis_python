@@ -79,7 +79,6 @@ class Data_Analysis_Util(object):
         i = employment.argmin()
         return (countries[i], employment[i])
 
-
     @staticmethod
     def over_all_data(array1, array2):
         return (array1 + array2) /2
@@ -93,7 +92,6 @@ class Data_Analysis_Util(object):
     def mean_time_for_paid_students(time_spent, days_to_cancel):
         return time_spent[days_to_cancel >= 7].mean()
 
-
     @staticmethod
     def variable_correlation(series1, series2):
         both_above = (series1 > series1.mean()) & (series2 > series2.mean())
@@ -106,3 +104,19 @@ class Data_Analysis_Util(object):
         return (num_same_direction, num_different_direction)
 
 
+    """
+    Pandas
+    """
+    @staticmethod
+    def max_gdp(data):
+        max_country = data.argmax()
+        max_value = data.loc[max_country]
+
+        return (max_country, max_value)
+
+    @staticmethod
+    def min_gdp(data):
+        min_country = data.argmin()
+        min_value = data.loc[min_country]
+
+        return (min_country, min_value)
