@@ -55,3 +55,33 @@ print "Life Expectancy \n", life_expectancy.describe()
 print "GDP \n", gdp.describe()
 print utils.variable_correlation(life_expectancy, gdp)
 
+#utils.run_plot(life_expectancy)
+
+gdp_countries = pd.Series([56.21, 89.32, 23.53, 65.90], index=['Germany', 'Argentina', 'Chile', 'USA'])
+
+print gdp_countries.loc['USA']
+print gdp_countries.iloc[0]
+
+print "Max: ", utils.max_gdp(gdp_countries)
+print "Min: ", utils.min_gdp(gdp_countries)
+
+"""
+Series
+"""
+
+a1 = pd.Series([1,2,3,4], index=['a','b','c','d'])
+a2 = pd.Series([10,20,30,40], index=['c','d','e','f'])
+
+minus_result = a1-a2
+times_result = a1*a2
+division_result = a1/a2
+sum_result = a1+a2
+
+print sum_result.dropna()
+print times_result.dropna()
+print times_result.dropna()
+print division_result.dropna()
+
+
+
+
