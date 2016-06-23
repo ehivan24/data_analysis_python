@@ -1,10 +1,6 @@
-import unicodecsv as csv
-from datetime import datetime as dt
-from collections import defaultdict
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+
 from Data_Analysis_Utils import Data_Analysis_Util as utils
 
 #life_expectancy.csv
@@ -55,7 +51,6 @@ print "Life Expectancy \n", life_expectancy.describe()
 print "GDP \n", gdp.describe()
 print utils.variable_correlation(life_expectancy, gdp)
 
-#utils.run_plot(life_expectancy)
 
 gdp_countries = pd.Series([56.21, 89.32, 23.53, 65.90], index=['Germany', 'Argentina', 'Chile', 'USA'])
 
@@ -65,6 +60,8 @@ print gdp_countries.iloc[0]
 print "Max: ", utils.max_gdp(gdp_countries)
 print "Min: ", utils.min_gdp(gdp_countries)
 
+#plt.hist(gdp_values)
+#plt.show()
 """
 Series
 """
@@ -81,6 +78,11 @@ print sum_result.dropna()
 print times_result.dropna()
 print times_result.dropna()
 print division_result.dropna()
+
+print a1.add(a2, fill_value=0)
+
+utils.run_plot(life_expectancy)
+
 
 
 
