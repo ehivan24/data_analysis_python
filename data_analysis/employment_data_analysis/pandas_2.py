@@ -7,6 +7,7 @@ from matplotlib import style
 import seaborn as sn
 import quandl as qdl
 import pickle
+style.use('ggplot')
 
 
 df = pd.read_csv('gdp_per_capita.csv')
