@@ -5,6 +5,8 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import json
+from urllib2 import urlopen
 
 
 class Data_Analysis_Util(object):
@@ -105,7 +107,7 @@ class Data_Analysis_Util(object):
 
 
     """
-    Pandas
+    Calculates the Max GDP
     """
     @staticmethod
     def max_gdp(data):
@@ -114,9 +116,68 @@ class Data_Analysis_Util(object):
 
         return (max_country, max_value)
 
+
+    """
+        Calculates the Min GDP
+    """
     @staticmethod
     def min_gdp(data):
         min_country = data.argmin()
         min_value = data.loc[min_country]
 
         return (min_country, min_value)
+
+    """
+    Convert Latitude and Longitude
+    """
+
+    @staticmethod
+    def get_place_name(lat, lon):
+        url = "http://maps.googleapis.com/maps/api/geocode/json?"
+        url += "latlng=%s,%s&sensor=false" % (lat, lon)
+        v = urlopen(url).read()
+        j = json.loads(v)
+
+        components_city = j['results'][0]['address_components']
+
+        print j
+
+        country = town = city = None
+        for com in components_city:
+            if "country" in com['types']:
+                country = com['long_name']
+
+            if "route" in com['types']:
+                town = com['short_name']
+
+            if "locality" in com['types']:
+                city = com['long_name']
+
+        return country, city, town
+
+    """
+        Check whether there is a correlation between two cols
+    """
+    @staticmethod
+    def correlation(x, y):
+        std_x = (x - x.mean()) / x.std(ddof=0)
+        std_y = (y - y.mean()) / y.std(ddof=0)
+        return (std_x * std_y).mean()
+
+
+    @staticmethod
+    def shifts_cols(values):
+        return values - values.shift(1)
+
+
+    @staticmethod
+    def sorting_data_frame_second_largest(df):
+        sorted_col = df.sort_values(ascending=False)
+        """ Returns second largest element in the column"""
+        return sorted_col.iloc[1]
+
+    @staticmethod
+    def sorting_data_frame_first_largest(df):
+        sorted_col = df.sort_values(ascending=False)
+        return sorted_col.iloc[0]
+
