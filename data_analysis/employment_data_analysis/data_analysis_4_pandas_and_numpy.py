@@ -7,29 +7,34 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 from Data_Analysis_Utils import Data_Analysis_Util as utils
 
+
+"""
+    Here we load the file.
+"""
+
 df_weather = pd.read_csv('nyc_subway_weather.csv')
 
 max_station = df_weather['ENTRIESn'].argmax()
 row_number = df_weather.iloc[max_station]
 """
-Print out the row with the highest number of entries.
+    Print out the row with the highest number of entries.
 """
 print row_number
 """
-prints out the approximate location of the station.
+    prints out the approximate location of the station.
 """
 print utils.get_place_name(40.7526, -73.9792)
 
 print df_weather['ENTRIESn'].describe()
 
 """
-Pearson's R
-Correlation between two arrays
+    Pearson's R
+    Correlation between two arrays
 
-expected output: (-1, 1, 0)
--1: Negative Correlation
- 1: Positive Correlation
- 0: No Correlation
+    expected output: (-1, 1, 0)
+    -1: Negative Correlation
+     1: Positive Correlation
+     0: No Correlation
 
 """
 
@@ -39,7 +44,7 @@ print "Correlation: ", utils.correlation(df_weather['ENTRIESn_hourly'], df_weath
 
 
 """
-Example with Pandas applymap()
+    Example with Pandas applymap()
 """
 
 df_grades = pd.DataFrame(
@@ -69,7 +74,7 @@ def convert_grade(grades):
 print convert_grade(df_grades)
 
 """
-Standardizing a func
+    Standardizing a func
 """
 
 
@@ -80,14 +85,32 @@ print std_col(df_grades['exams_1'])
 print std_col(df_grades['exams_2'])
 
 print "Largest Number of Entries: \n", utils.sorting_data_frame_first_largest(df_weather['ENTRIESn'])
-print "SeCond Largest Number of Entries: \n", utils.sorting_data_frame_second_largest(df_weather['ENTRIESn'])
+print "Second Largest Number of Entries: \n", utils.sorting_data_frame_second_largest(df_weather['ENTRIESn'])
 
 
+df = pd.DataFrame({
+    'a': [3, 4, 7, 9, 2],
+    'b': [1, 2, 4, 5, 89],
+    'c': [6, 34, 65, 2, 00]
+})
 
 
+"""
+    Apply pandas
+"""
 
+print utils.second_largest_data_frame(df)
 
+"""
+    Group by function in Pandas
+"""
+# mean of the col b.
+print "Mean: ", df.groupby('a').sum()['b'].mean()
 
+print "Group: ", df.groupby('a').groups
 
+print "", df.describe()
 
-
+plt.plot(df)
+plt.legend()
+#plt.show()

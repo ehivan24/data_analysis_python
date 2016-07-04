@@ -13,19 +13,28 @@ class Data_Analysis_Util(object):
 
     def __init__(self):
         pass
-
+    """
+        Read the file
+    """
     @staticmethod
     def read_file(file_to_read):
         with open(file_to_read, 'rb') as f:
             read = csv.DictReader(f)
             return list(read)
 
+    """
+        Parses the string to date format
+    """
     @staticmethod
     def parse_date(date):
         if date == '':
             return None
         else:
             return dt.strptime(date, '%Y-%m-%d')
+
+    """
+        Parses the String to int number
+    """
 
     @staticmethod
     def parse_int(number):
@@ -34,6 +43,10 @@ class Data_Analysis_Util(object):
         else:
             return int(number)
 
+    """
+        Parses int number from a float number
+    """
+
     @staticmethod
     def parse_int_from_float(number):
         if number == '':
@@ -41,6 +54,10 @@ class Data_Analysis_Util(object):
         else:
             return int(float(number))
 
+
+    """
+        Round up the number
+    """
     @staticmethod
     def round_data(number):
         if number == '':
@@ -59,6 +76,10 @@ class Data_Analysis_Util(object):
         plt.ylabel("YLabel")
         plt.show()
 
+    """
+        Describes the data, ie. mean, max, min, std, & sum.
+    """
+
     @staticmethod
     def describe_data(data):
         print("Mean: ", np.mean(data))
@@ -69,7 +90,7 @@ class Data_Analysis_Util(object):
         print("Sum: ", np.sum(data))
 
     """
-    Numpy
+        Numpy
     """
     @staticmethod
     def max_employment(countries, employment):
@@ -105,9 +126,8 @@ class Data_Analysis_Util(object):
 
         return (num_same_direction, num_different_direction)
 
-
     """
-    Calculates the Max GDP
+        Calculates the Max GDP
     """
     @staticmethod
     def max_gdp(data):
@@ -115,7 +135,6 @@ class Data_Analysis_Util(object):
         max_value = data.loc[max_country]
 
         return (max_country, max_value)
-
 
     """
         Calculates the Min GDP
@@ -128,7 +147,7 @@ class Data_Analysis_Util(object):
         return (min_country, min_value)
 
     """
-    Convert Latitude and Longitude
+        Convert Latitude and Longitude
     """
 
     @staticmethod
@@ -164,11 +183,9 @@ class Data_Analysis_Util(object):
         std_y = (y - y.mean()) / y.std(ddof=0)
         return (std_x * std_y).mean()
 
-
     @staticmethod
     def shifts_cols(values):
         return values - values.shift(1)
-
 
     @staticmethod
     def sorting_data_frame_second_largest(df):
@@ -180,4 +197,8 @@ class Data_Analysis_Util(object):
     def sorting_data_frame_first_largest(df):
         sorted_col = df.sort_values(ascending=False)
         return sorted_col.iloc[0]
+
+    @staticmethod
+    def second_largest_data_frame(df):
+        return df.apply(Data_Analysis_Util.sorting_data_frame_second_largest)
 
