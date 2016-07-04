@@ -159,8 +159,6 @@ class Data_Analysis_Util(object):
 
         components_city = j['results'][0]['address_components']
 
-        print j
-
         country = town = city = None
         for com in components_city:
             if "country" in com['types']:

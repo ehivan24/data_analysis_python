@@ -18,5 +18,7 @@ def find_place_to_eat(type_of_food, zip_code ):
         print "Website: ", item['Url']
 
 #find_place_to_eat('pizza', 32901)
-find_place_to_eat('shakes', 32901)
+#find_place_to_eat('shakes', 32901)
+find_place_to_eat('bars', 32901)
+
 
